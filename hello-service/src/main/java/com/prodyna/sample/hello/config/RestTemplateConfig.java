@@ -28,8 +28,7 @@ public class RestTemplateConfig {
           outReq.getHeaders().set(
             DEBUG_HEADER, debugHeader
           );
-          r
-            eturn clientHttpReqExec.execute(outReq, bytes);
+          return clientHttpReqExec.execute(outReq, bytes);
         });
     }
     return restTemplate;

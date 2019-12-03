@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        debug: disabled
+    spec:
+      containers:
+      - name: main
+        image: 'replace-me:please'
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        resources:
+          limits:
+            cpu: '2'
+            memory: 512Mi
+          requests:
+            cpu: '0.1'
+            memory: 256Mi

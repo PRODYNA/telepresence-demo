@@ -1,0 +1,44 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: hello
+spec:
+  host: hello-service
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+  subsets:
+  - name: default
+    labels:
+      debug: disabled
+  - name: debug
+    labels:
+      debug: hello-service
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: name
+spec:
+  host: name-service
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+  subsets:
+  - name: default
+    labels:
+      debug: disabled
+  - name: debug
+    labels:
+      debug: name-service
+---
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "force-mtls"
+spec:
+  targets:
+  - name: name-service
+  - name: hello-service
+  peers:
+  - mtls: {}

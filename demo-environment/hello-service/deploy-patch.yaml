@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy
+spec:
+  template:
+    spec:
+      containers:
+        - name: main
+          env:
+            - name: NAME_SERVICE_URL
+              value: "http://name-service"
+          volumeMounts:
+            - mountPath: /my-config
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: hello-cfg

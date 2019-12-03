@@ -1,0 +1,58 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: hello-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "hello.fassmus.de"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hello
+spec:
+  hosts:
+  - hello.fassmus.de
+  gateways:
+  - hello-gateway
+  http:
+    - match:
+      - headers:
+          debug:
+            exact: hello-service
+      route:
+      - destination:
+          host: hello-service
+          subset: debug
+    - route:
+      - destination:
+          host: hello-service
+          subset: default
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: name
+spec:
+  hosts:
+  - name-service
+  http:
+    - match:
+      - headers:
+          debug:
+            exact: name-service
+      route:
+      - destination:
+          host: name-service
+          subset: debug
+    - route:
+      - destination:
+          host: name-service
+          subset: default

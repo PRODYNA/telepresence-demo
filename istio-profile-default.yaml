@@ -22,7 +22,7 @@ spec:
       enabled: true
       security:
         # Enable authentication for Grafana
-        enabled: true
+        enabled: false
     kiali:
       # Enable the Kiali deployment for a service mesh observability dashboard
       enabled: true

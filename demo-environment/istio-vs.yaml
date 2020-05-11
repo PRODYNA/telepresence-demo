@@ -11,7 +11,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "hello.fassmus.de"
+    - "demo.fassmus.de"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -19,7 +19,7 @@ metadata:
   name: hello
 spec:
   hosts:
-  - hello.fassmus.de
+  - demo.fassmus.de
   gateways:
   - hello-gateway
   http:

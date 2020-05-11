@@ -32,8 +32,8 @@ spec:
     labels:
       debug: name-service
 ---
-apiVersion: "authentication.istio.io/v1alpha1"
-kind: "Policy"
+apiVersion: authentication.istio.io/v1alpha1
+kind: Policy
 metadata:
   name: "force-mtls"
 spec:

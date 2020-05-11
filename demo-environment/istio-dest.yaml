@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: hello
+  namespace: telepresence
 spec:
   host: hello-service
   trafficPolicy:
@@ -19,6 +20,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: name
+  namespace: telepresence
 spec:
   host: name-service
   trafficPolicy:
@@ -35,7 +37,8 @@ spec:
 apiVersion: authentication.istio.io/v1alpha1
 kind: Policy
 metadata:
-  name: "force-mtls"
+  name: force-mtls
+  namespace: telepresence
 spec:
   targets:
   - name: name-service
